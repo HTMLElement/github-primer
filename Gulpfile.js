@@ -7,9 +7,11 @@ const runSequence = require('run-sequence');
 const plugins = gulpLoadPlugins();
 
 const primer_modules_dir = './node_modules/'
-const primer_modules = fs.readdirSync(primer_modules_dir)
-  .filter(x => x.startsWith("primer-"))
-  .map(x => x.substr(7));
+// const primer_modules = fs.readdirSync(primer_modules_dir)
+//   .filter(x => x.startsWith("primer-"))
+//   .filter(x => x != "primer-css")
+//   .map(x => x.substr(7));
+const primer_modules = ["buttons", "tables"];
 
 css_dir = "./css"
 dest = "./"
