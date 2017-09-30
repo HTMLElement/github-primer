@@ -1,0 +1,18 @@
+{
+  "name": "github-primer-elements",
+  "version": "0.0.1",
+  "description": "HTML5 Elements from GitHub Primer CSS", 
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HTMLElement/github-primer.git"
+  },
+  "keywords": [
+    "WebComponents"
+  ],
+  "author": "Stefan Grönke <stefan@gronke.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HTMLElement/github-primer/issues"
+  },
+  "homepage": "https://github.com/HTMLElement/github-primer#readme"
+}
