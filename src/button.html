@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <style inline type="text/css" src="../css/buttons.css"></style>
+  <script>
+
+    var ownerDocument = document.currentScript.ownerDocument;
+    (function() {
+      var ElementPrototype = Object.create(HTMLButtonElement.prototype);
+      ElementPrototype.createdCallback = function () {
+        const shadowRoot = this.attachShadow({ mode: 'open' });
+        this.childNodes.forEach(child => shadowRoot.appendChild(child))
+        this.setAttribute("type", "button");
+        ["m-1", "btn"].forEach(className => this.classList.add(className))
+      };
+      document.registerElement("primer-button", {
+          prototype: ElementPrototype
+      });
+    })()
+
+  </script>
+</body>
+</html>
