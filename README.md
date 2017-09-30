@@ -1,9 +1,9 @@
 GitHub Primer HTML5 Element Collection
 ======================================
 
-## GitHub Primer Modules
+Credit for the icons and stylesheet belongs to GitHub's Design Team: http://primercss.io/
 
-### Button
+## Button
 
 Wraps the css-primer [buttons](https://github.com/primer/primer-css/tree/master/modules/primer-buttons) module.
 
@@ -22,4 +22,11 @@ Supported button types
 ```html
 <link rel="import" href="bower_components/github-primer-elements/button.html" />
 <primer-button primary>Click Me</primer-button>
+```
+
+## Octicons
+
+```html
+<link rel="import" href="bower_components/github-primer-elements/octicon.html" />
+<primer-octicon icon="bug"></primer-octicon>
 ```
