@@ -12,12 +12,44 @@ const primer_modules = fs.readdirSync(primer_modules_dir)
 
 css_dir = "./css"
 dest = "./"
+src = "./src"
+
+gulp.task('watch', function() {
+
+  gulp.watch([
+    path.join(src, "*.html")
+  ], ["html:refresh"])
+
+  gulp.watch([
+    "demo/*",
+    path.join(src, "*.html")
+  ], ["html:refresh"])
+
+});
+
+gulp.task('html:refresh', function() {
+  gulp.src([
+    "demo/*.html",
+    path.join(dest, "*.html")
+  ])
+  .pipe(plugins.connect.reload());
+});
 
 gulp.task('clean', function () {
   return gulp.src(path.join(css_dir, "*.css"), {
       read: false
     })
     .pipe(plugins.clean());
+});
+
+gulp.task('connect', function() {
+  plugins.connect.server({
+    host: '0.0.0.0',
+    root: dest,
+    port: process.env.CONNECT_PORT || 9000,
+    livereload: true,
+    debug: false
+  });
 });
 
 gulp.task('styles', function() { 
@@ -45,7 +77,7 @@ gulp.task('styles', function() {
   
 });
 
-gulp.task('html', function() {
+gulp.task('html:compile', function() {
   
   gulp.src("src/*.html")
   .pipe(plugins.inlineSource())
@@ -53,4 +85,6 @@ gulp.task('html', function() {
 
 });
 
-gulp.task('default', ['clean', 'styles', 'html']);
+gulp.task('warmup', ['clean', 'styles', 'html:compile']);
+
+gulp.task('default', ['connect', 'warmup', 'watch']);
