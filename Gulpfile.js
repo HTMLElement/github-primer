@@ -18,7 +18,7 @@ gulp.task('watch', function() {
 
   gulp.watch([
     path.join(src, "*.html")
-  ], ["html:refresh"])
+  ], ["html:compile", "html:refresh"])
 
   gulp.watch([
     "demo/*",
