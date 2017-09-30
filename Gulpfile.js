@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const gulp = require('gulp');
 const gulpLoadPlugins = require('gulp-load-plugins');
+const runSequence = require('run-sequence');
 
 const plugins = gulpLoadPlugins();
 
@@ -85,6 +86,10 @@ gulp.task('html:compile', function() {
 
 });
 
-gulp.task('warmup', ['clean', 'styles', 'html:compile']);
+gulp.task('warmup', runSequence(
+  'clean',
+  'styles',
+  'html:compile'
+));
 
-gulp.task('default', ['connect', 'warmup', 'watch']);
+gulp.task('default', runSequence(['warmup', 'connect'], 'watch'));
