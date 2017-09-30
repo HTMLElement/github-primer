@@ -1,7 +1,7 @@
 {
   "name": "github-primer-elements",
   "version": "0.0.1",
-  "description": "HTML5 Elements from GitHub Primer CSS", 
+  "description": "HTML5 Elements from GitHub Primer CSS",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HTMLElement/github-primer.git"
@@ -14,5 +14,15 @@
   "bugs": {
     "url": "https://github.com/HTMLElement/github-primer/issues"
   },
-  "homepage": "https://github.com/HTMLElement/github-primer#readme"
+  "homepage": "https://github.com/HTMLElement/github-primer#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-inline-source": "^3.1.0",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "primer-css": "^9.4.0"
+  }
 }
