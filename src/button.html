@@ -4,21 +4,21 @@
   <style inline type="text/css" src="../css/buttons.css"></style>
   <script>
 
-    var ownerDocument = document.currentScript.ownerDocument;
     (function() {
-      const defaultClasses = ["m-1", "btn"];
-      const buttonTypes = ["primary", "danger", "outline"];
+      var ownerDocument = document.currentScript.ownerDocument;
+      var defaultClasses = ['m-1', 'btn'];
+      var buttonTypes = ['primary', 'danger', 'outline'];
       var ElementPrototype = Object.create(HTMLButtonElement.prototype);
       ElementPrototype.createdCallback = function () {
-        const shadowRoot = this.attachShadow({ mode: 'open' });
+        var shadowRoot = this.attachShadow({ mode: 'open' });
         this.childNodes.forEach(child => shadowRoot.appendChild(child))
-        this.setAttribute("type", "button");
+        this.setAttribute('type', 'button');
         defaultClasses.forEach(className => this.classList.add(className))
         buttonTypes
           .filter(type => this.hasAttribute(type))
-          .forEach(type => this.classList.add("btn-" + type))
+          .forEach(type => this.classList.add('btn-' + type))
       };
-      document.registerElement("primer-button", {
+      document.registerElement('primer-button', {
           prototype: ElementPrototype
       });
     })()
