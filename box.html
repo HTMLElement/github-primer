@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <template id="primer-box">
+    <!-- <style inline type="text/css" src="../css/box.css"></style> -->
+    <h1>A Box</h1>
+  </template>
+  <script>
+
+    var ownerDocument = document.currentScript.ownerDocument;
+    (function() {
+      var template = ownerDocument.getElementsByTagName("template")[0];
+      var ElementPrototype = Object.create(HTMLElement.prototype);
+      ElementPrototype.createdCallback = function () {
+        const shadowRoot = this.attachShadow({ mode: 'open' });
+        shadowRoot.appendChild(document.importNode(template.content, true));
+        debugger
+      };
+      document.registerElement(template.id, {
+          prototype: ElementPrototype,
+          extends: 'div'
+      });
+    })()
+
+  </script>
+</body>
+</html>
