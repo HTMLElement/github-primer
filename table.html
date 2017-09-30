@@ -1,0 +1,24 @@
+<html>
+<body>
+  <style type="text/css">.data-table{width:100%;margin-top:16px;border-collapse:collapse;border:1px #e1e4e8 solid;box-shadow:0 1px 1px rgba(27,31,35,.05)}.data-table th{font-weight:400;text-align:left}.data-table td,.data-table th{padding:16px;border-right:1px #e1e4e8 solid;border-bottom:1px #e1e4e8 solid}.data-table tbody th{width:25%}.data-table tbody td,.data-table tbody th{border-bottom-color:#e1e4e8}.data-table tbody tr:last-child td,.data-table tbody tr:last-child th{border-bottom:1px #e1e4e8 solid}</style>
+  <script>
+
+    (function() {
+      var ownerDocument = document.currentScript.ownerDocument;
+      var ElementPrototype = Object.create(HTMLTableElement.prototype);
+      ElementPrototype.createdCallback = function () {
+        this.classList.add('data-table');
+        var shadowRoot = this.attachShadow({ mode: 'open' });
+        Array.from(this.childNodes)
+          .filter(child => (child instanceof HTMLElement))
+          .forEach(child => { shadowRoot.appendChild(child) });
+      };
+      document.registerElement('primer-table', {
+          prototype: ElementPrototype,
+          extends: 'table'
+      });
+    })()
+
+  </script>
+</body>
+<html>

@@ -1,0 +1,24 @@
+<html>
+<body>
+  <style inline type="text/css" src="../css/tables.css"></style>
+  <script>
+
+    (function() {
+      var ownerDocument = document.currentScript.ownerDocument;
+      var ElementPrototype = Object.create(HTMLTableElement.prototype);
+      ElementPrototype.createdCallback = function () {
+        this.classList.add('data-table');
+        var shadowRoot = this.attachShadow({ mode: 'open' });
+        Array.from(this.childNodes)
+          .filter(child => (child instanceof HTMLElement))
+          .forEach(child => { shadowRoot.appendChild(child) });
+      };
+      document.registerElement('primer-table', {
+          prototype: ElementPrototype,
+          extends: 'table'
+      });
+    })()
+
+  </script>
+</body>
+<html>
