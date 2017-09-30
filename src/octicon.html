@@ -1,0 +1,31 @@
+<html>
+<body>
+  <script>
+
+    (function() {
+
+      var sourcePath = "octicons/";
+
+      var ownerDocument = document.currentScript.ownerDocument;
+      var ElementPrototype = Object.create(HTMLTableElement.prototype);
+      ElementPrototype.createdCallback = function () {
+        this.classList.add('data-table');
+        var shadowRoot = this.attachShadow({ mode: 'open' });
+        var svg = document.createElement('svg');
+        var iconName = this.getAttribute("icon");
+        fetch(sourcePath + iconName + ".svg")
+          .then((result) => {
+            console.log(result)
+            debugger;
+            svg.innerHTML = result.body
+            shadowRoot.appendChild(svg)
+          });
+      };
+      document.registerElement('primer-octicon', {
+          prototype: ElementPrototype
+      });
+    })()
+
+  </script>
+</body>
+<html>

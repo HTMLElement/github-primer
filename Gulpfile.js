@@ -14,6 +14,7 @@ const primer_modules_dir = './node_modules/'
 const primer_modules = ["buttons", "tables"];
 
 css_dir = "./css"
+icon_dir = "./octicons"
 dest = "./"
 src = "./src"
 
@@ -30,6 +31,16 @@ gulp.task('watch', function() {
 
 });
 
+gulp.task('copy:octicons', function () {
+  return gulp.src(
+    './node_modules/octicons/build/svg/*.svg', {
+      'base': './node_modules/octicons/build/svg'
+    })
+    .pipe(plugins.copy('./octicons', {
+      prefix: 4
+    }));
+});
+
 gulp.task('html:refresh', function() {
   gulp.src([
     "demo/*.html",
@@ -39,9 +50,12 @@ gulp.task('html:refresh', function() {
 });
 
 gulp.task('clean', function () {
-  return gulp.src(path.join(css_dir, "*.css"), {
-      read: false
-    })
+  return gulp.src([
+    path.join(css_dir, "*.css"),
+    path.join(icon_dir, "*.svg")
+  ], {
+    read: false
+  })
     .pipe(plugins.clean());
 });
 
@@ -63,9 +77,11 @@ gulp.task('styles', function() {
   )), {
     base: primer_modules_dir
   })
+  .pipe(plugins.debug())
   .pipe(plugins.plumber({
     errorHandler: function(error) {
-      this.emit('end');
+      console.log("OH NO", error)
+      this.emit('skip');
     }
   }))
   .pipe(plugins.sass({
@@ -88,10 +104,21 @@ gulp.task('html:compile', function() {
 
 });
 
-gulp.task('warmup', runSequence(
-  'clean',
-  'styles',
-  'html:compile'
-));
+gulp.task('warmup', function(done) {
+  runSequence(
+    'clean',
+    'styles',
+    'copy:octicons',
+    'html:compile',
+    done
+  );
+});
 
-gulp.task('default', runSequence(['warmup', 'connect'], 'watch'));
+gulp.task('default', function(done) {
+  runSequence(
+    'warmup',
+    'connect',
+    'watch',
+    done
+  );
+});
