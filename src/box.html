@@ -1,21 +1,89 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <link rel="import" href="_loader.html" />
+</head>
 <body>
-  <style inline type="text/css" src="../css/box.css"></style>
+  <template>
+    <style inline type="text/css" src="../css/base.css"></style>
+    <style inline type="text/css" src="../css/box.css"></style>
+  </template>
   <script>
-
-    var ownerDocument = document.currentScript.ownerDocument;
+    
     (function() {
-      var ElementPrototype = Object.create(HTMLElement.prototype);
-      ElementPrototype.createdCallback = function () {
-        this.classList.add('Box');
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.appendChild(document.importNode(this, true));
+
+      var classMaps = {
+        'primer-box-header': 'Box-header',
+        'primer-box-footer': 'Box-footer',
+        'primer-box-row': 'Box-row',
       };
-      document.registerElement('primer-box', {
-          prototype: ElementPrototype
+
+      var boxTypes = {
+        'spacious': 'Box--spacious',
+        'condensed': 'Box--condensed',
+        'danger': 'Box--danger',
+        'blue': 'Box--blue',
+        'yellow': 'Box--yellow',
+        'gray': 'Box--gray'
+      }
+
+      function enhanceChildNodes(root) {
+
+        return Array.from(root.childNodes)
+          .forEach((node) => {
+
+            if (!(node instanceof HTMLElement)) {
+              return node;
+            }
+
+            Object.keys(classMaps)
+              .forEach((attributeName) => {
+                if (node.hasAttribute(attributeName)) {
+                  node.classList.add(classMaps[attributeName])
+                }
+              });
+
+            if (node.tagName.match(/^H[0-9]$/)) {
+              node.classList.add("Box-title")
+            }
+
+            enhanceChildNodes(node);
+
+          });
+
+      }
+
+      githubPrimer.registerElement('primer-box', {
+        create: function (shadowRoot, ownerDocument, document) {
+
+          var boxElement = document.createElement('div');
+          boxElement.classList.add('Box');
+
+          Object.keys(boxTypes)
+            .forEach((attributeName) => {
+              if (this.hasAttribute(attributeName)) {
+                boxElement.classList.add(boxTypes[attributeName])
+              }
+            });
+
+          enhanceChildNodes(this);
+
+          if ((this.childNodes.length === 1) && (this.childNodes[0] instanceof Text)) {
+            var boxRow = document.createElement('div');
+            boxRow.setAttribute('primer-box-row', '');
+            boxRow.classList.add(classMaps['primer-box-row'])
+            boxRow.textContent = this.childNodes[0].textContent;
+            boxElement.appendChild(boxRow);
+          } else {
+            Array.from(this.childNodes)
+              .forEach((node) => boxElement.appendChild(node));
+          }
+
+          shadowRoot.appendChild(boxElement);
+
+        }
       });
-    })()
+    })();
 
   </script>
 </body>
