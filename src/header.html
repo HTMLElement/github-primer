@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="import" href="_loader.html" />
+</head>
+<body>
+  <template>
+    <style inline type="text/css" src="../css/base.css"></style>
+    <style inline type="text/css" src="../css/page-headers.css"></style>
+  </template>
+  <script>
+
+    (function() {
+
+      var headerTypes = {
+        'mini': 'jumbotron-minitron',
+        'super': 'jumbotron-supertron',
+        'shadow': 'jumbotron-shadow',
+        'photo': 'jumbotron-photo'
+      }
+
+      githubPrimer.registerElement('primer-header', {
+        create: function (shadowRoot, ownerDocument, document) {
+          var headerElement = document.createElement("div");
+          headerElement.classList.add('jumbotron');
+          
+          Object.keys(headerTypes)
+            .forEach((attributeName) => {
+              if (this.hasAttribute(attributeName)) {
+                headerElement.classList.add(headerTypes[attributeName])
+              }
+            });
+
+          headerElement.innerHTML = this.innerHTML;
+
+          shadowRoot.appendChild(headerElement);
+        }
+      });
+
+    })();
+
+  </script>
+</body>
+</html>
