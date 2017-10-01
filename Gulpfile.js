@@ -41,6 +41,16 @@ gulp.task('copy:octicons', function () {
     }));
 });
 
+gulp.task('copy:octicons-license', function () {
+  return gulp.src(
+    './node_modules/octicons/LICENSE', {
+      'base': './node_modules/octicons'
+    })
+    .pipe(plugins.copy('./octicons', {
+      prefix: 2
+    }));
+});
+
 gulp.task('html:refresh', function() {
   gulp.src([
     "demo/*.html",
@@ -115,6 +125,7 @@ gulp.task('warmup', function(done) {
     'clean',
     'styles',
     'copy:octicons',
+    'copy:octicons-license',
     'html:compile',
     done
   );
