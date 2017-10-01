@@ -90,7 +90,6 @@ gulp.task('styles', function() {
   .pipe(plugins.debug())
   .pipe(plugins.plumber({
     errorHandler: function(error) {
-      console.log("OH NO", error)
       this.emit('skip');
     }
   }))
