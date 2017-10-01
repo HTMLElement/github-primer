@@ -52,6 +52,23 @@
 
       };
 
+      githubPrimer['propagateHostStyles'] = (styles, selector) => {
+        var i, j, n, m, curr, rules;
+        var selectorPattern = new RegExp("^" + selector);
+        var newRules = [];
+        console.log(styles);  
+        for (i=0, n=styles.length; i<n; i++) {
+          rules = styles[i].cssRules
+          for (j=0, m=rules.length; j<m; j++) {
+            curr = rules[j];
+            if (curr.selectorText === selector) {
+              newRules.push(curr.cssText.replace(selectorPattern, ":host"))
+            }
+          }
+          newRules.forEach((ruleText) => styles[i].insertRule(ruleText));
+        }
+      }
+
     })();
 
   </script>

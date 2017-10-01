@@ -10,36 +10,22 @@
 
       iconCache = {};
 
-      function propagate_host_styles(styles, selector) {
-        var i, j, n, m, curr, rules;
-        var selectorPattern = new RegExp("^" + selector);
-        var newRules = [];
-        for (i=0, n=styles.length; i<n; i++) {
-          rules = styles[i].cssRules
-          for (j=0, m=rules.length; j<m; j++) {
-            curr = rules[j];
-            if (curr.selectorText === selector) {
-              newRules.push(curr.cssText.replace(selectorPattern, ":host"))
-            }
-          }
-          newRules.forEach((ruleText) => styles[i].insertRule(ruleText));
-        }
-      }
-
       githubPrimer.registerElement('primer-table', {
         create: function (shadowRoot, ownerDocument, document) {
 
           var tbody = document.createElement('tbody');
           tbody.classList.add('data-table');
 
-          propagate_host_styles(shadowRoot.styleSheets, '.data-table');
+          githubPrimer.propagateHostStyles(
+            shadowRoot.styleSheets,
+            '.data-table'
+          );
 
           var tableContent = this.getElementsByTagName('tbody');
           if (tableContent.length > 0) {
             Array.from(tableContent[0].childNodes)
             .filter(child => (child instanceof HTMLElement))
             .forEach(child => {
-              console.log(child);
               tbody.appendChild(child)
             });
           }
