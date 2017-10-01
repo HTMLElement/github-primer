@@ -115,7 +115,10 @@ gulp.task('html:compile', function() {
 });
 
 gulp.task('upload', function() {
-  return gulp.src("./{octicons,demo,}/*.{html,svg}")
+  return gulp.src([
+    "./{octicons,demo,}/*.{html,svg,css}",
+    ".nojekyll"
+  ])
     .pipe(plugins.debug())
     .pipe(plugins.ghPages());
 });
