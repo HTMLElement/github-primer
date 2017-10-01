@@ -7,7 +7,7 @@
 
     (function() {
 
-      function _applyTemplate(ownerDocument, shadowRoot) {
+      function _applyTemplates(ownerDocument, shadowRoot) {
         Array.from(ownerDocument.getElementsByTagName("template"))
           .forEach((template) => {
             var clone = document.importNode(template.content, true);
@@ -30,17 +30,25 @@
         var ownerDocument = document.currentScript.ownerDocument;
         var ElementPrototype = Object.create(prototypeElement.prototype);
         ElementPrototype.createdCallback = function() {
+
           var shadowRoot = this.attachShadow({ mode: 'open' });
-          _applyTemplate(ownerDocument, shadowRoot);
+          _applyTemplates(ownerDocument, shadowRoot);
 
           if (options['create'] !== undefined) {
             options.create.call(this, shadowRoot, ownerDocument, document);
           }
+
         }
 
-        document.registerElement(name, {
+        var elementOptions = {
           prototype: ElementPrototype
-        });
+        };
+
+        if (options['extends'] !== undefined) {
+          elementOptions['extends'] = options['extends']
+        }
+
+        document.registerElement(name, elementOptions);
 
       };
 
