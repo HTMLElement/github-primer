@@ -3,23 +3,28 @@
   <script>
 
     (function() {
-      var ownerDocument = document.currentScript.ownerDocument;
-      var ElementPrototype = Object.create(HTMLElement.prototype);
-      var sourcePath = ownerDocument.baseURI.replace(/\/[^\\/]+$/, "") + "/octicons/";
-      ElementPrototype.createdCallback = function () {
-        this.classList.add('octicon');
-        var shadowRoot = this.attachShadow({ mode: 'open' });
-        var iconName = this.getAttribute("icon");
-        fetch(sourcePath + iconName + ".svg")
-          .then((result) => result.text())
-          .then((text) => {
-            shadowRoot.innerHTML = text
-          });
-      };
-      document.registerElement('primer-octicon', {
-          prototype: ElementPrototype
+
+      iconCache = {};
+
+      githubPrimer.registerElement('primer-octicon', {
+        create: function (shadowRoot, ownerDocument, document) {
+
+          var sourcePath = ownerDocument.baseURI.replace(/\/[^\\/]+$/, "") + "/octicons/";
+          var iconName = this.getAttribute("icon");
+
+          if (iconCache[iconName] === undefined) {
+            iconCache[iconName] = fetch(sourcePath + iconName + ".svg")
+              .then((result) => result.text())
+          }
+
+          iconCache[iconName]
+            .then((text) => {
+              shadowRoot.innerHTML = text;
+            });
+        }
       });
-    })()
+
+    })();
 
   </script>
 </body>
