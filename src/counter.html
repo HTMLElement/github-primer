@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="import" href="_loader.html" />
+</head>
+<body>
+  <template>
+    <style inline type="text/css" src="../css/base.css"></style>
+    <style inline type="text/css" src="../css/bgcolors.css"></style>
+    <style inline type="text/css" src="../css/counter.css"></style>
+  </template>
+  <script>
+
+    (function() {
+
+      var types = {
+        'gray': 'Counter--gray',
+        'gray-light': 'Counter--gray-light'
+      };
+
+      githubPrimer.registerElement('primer-counter', {
+        create: function (shadowRoot, ownerDocument, document) {
+
+          var labelElement = document.createElement("span");
+          labelElement.classList.add('Counter');
+          labelElement.innerHTML = this.innerHTML;
+
+          if (this.hasAttribute('color')) {
+            var color = this.getAttribute('color');
+            labelElement.classList.add('bg-' + color);
+          }
+
+          Object.keys(types)
+            .forEach((attributeName) => {
+              if (this.hasAttribute(attributeName)) {
+                labelElement.classList.add(types[attributeName])
+              }
+            });
+
+          shadowRoot.appendChild(labelElement);
+
+        }
+      });
+
+    })();
+
+  </script>
+</body>
+</html>

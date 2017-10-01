@@ -11,7 +11,13 @@ const primer_modules_dir = './node_modules/'
 //   .filter(x => x.startsWith("primer-"))
 //   .filter(x => x != "primer-css")
 //   .map(x => x.substr(7));
-const primer_modules = ["base", "box", "buttons", "tables", "page-headers"];
+const primer_modules = [
+  "base",
+  "box",
+  "buttons",
+  "page-headers",
+  "tables"
+];
 
 css_dir = "./css"
 icon_dir = "./octicons"
@@ -23,6 +29,10 @@ gulp.task('watch', function() {
   gulp.watch([
     path.join(src, "*.html")
   ], ["html:compile", "html:refresh"])
+
+  gulp.watch([
+    path.join(src, "*.scss")
+  ], ["styles:src", "html:refresh"])
 
   gulp.watch([
     "demo/*",
@@ -79,7 +89,7 @@ gulp.task('connect', function() {
   });
 });
 
-gulp.task('styles', function() { 
+gulp.task('styles:github', function() { 
   return gulp.src(primer_modules.map(module_name => path.join(
     primer_modules_dir,
     "primer-" + module_name,
@@ -87,7 +97,6 @@ gulp.task('styles', function() {
   )), {
     base: primer_modules_dir
   })
-  .pipe(plugins.debug())
   .pipe(plugins.plumber({
     errorHandler: function(error) {
       this.emit('skip');
@@ -102,15 +111,30 @@ gulp.task('styles', function() {
     path.dirname = "."
   }))
   .pipe(gulp.dest(css_dir));
-  
+});
+
+gulp.task('styles:src', function() { 
+  return gulp.src(primer_modules.map(module_name => path.join(
+    "./src/*.scss"
+  )), {
+    base: "./src"
+  })
+  .pipe(plugins.plumber({
+    errorHandler: function(error) {
+      this.emit('skip');
+    }
+  }))
+  .pipe(plugins.sass({
+    includePaths: ['./node_modules/']
+  }))
+  .pipe(plugins.plumber.stop())
+  .pipe(gulp.dest(css_dir));
 });
 
 gulp.task('html:compile', function() {
-  
   gulp.src("src/*.html")
   .pipe(plugins.inlineSource())
   .pipe(gulp.dest(dest))
-
 });
 
 gulp.task('upload', function() {
@@ -125,7 +149,8 @@ gulp.task('upload', function() {
 gulp.task('warmup', function(done) {
   runSequence(
     'clean',
-    'styles',
+    'styles:github',
+    'styles:src',
     'copy:octicons',
     'copy:octicons-license',
     'html:compile',
