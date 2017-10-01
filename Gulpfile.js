@@ -11,7 +11,7 @@ const primer_modules_dir = './node_modules/'
 //   .filter(x => x.startsWith("primer-"))
 //   .filter(x => x != "primer-css")
 //   .map(x => x.substr(7));
-const primer_modules = ["buttons", "tables"];
+const primer_modules = ["box", "buttons", "tables"];
 
 css_dir = "./css"
 icon_dir = "./octicons"

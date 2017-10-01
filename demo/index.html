@@ -1,5 +1,6 @@
 <html>
 	<head>
+		<link rel="import" href="../box.html" />
 		<link rel="import" href="../button.html" />
 		<link rel="import" href="../octicon.html" />
 		<link rel="import" href="../table.html" />
@@ -8,10 +9,15 @@
 
 		<h1>Primer Demo</h1>
 
-		<section id="octicons">
-			<h2>primer-octicon</h2>
-			<primer-octicon icon="alert"></primer-octicon>
-			<primer-octicon icon="bug"></primer-octicon>
+		<section id="primer-box">
+			<h2>primer-box</h2>
+			<primer-box>This is a box.</primer-box>
+
+			<primer-box>
+				<primer-box-row>Box row one</primer-box-row>
+				<primer-box-row>Box row two</primer-box-row>
+				<primer-box-row>Box row three</primer-box-row>
+			</primer-box>
 		</section>
 
 		<section id="primer-button">
@@ -23,6 +29,12 @@
 			<primer-button danger>Danger</primer-button>
 			<br>
 			<primer-button outline>Outline</primer-button>
+		</section>
+
+		<section id="octicons">
+			<h2>primer-octicon</h2>
+			<primer-octicon icon="alert"></primer-octicon>
+			<primer-octicon icon="bug"></primer-octicon>
 		</section>
 
 		<section id="primer-table">

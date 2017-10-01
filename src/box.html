@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <style inline type="text/css" src="../css/box.css"></style>
+  <script>
+
+    var ownerDocument = document.currentScript.ownerDocument;
+    (function() {
+      var ElementPrototype = Object.create(HTMLElement.prototype);
+      ElementPrototype.createdCallback = function () {
+        this.classList.add('Box');
+        const shadowRoot = this.attachShadow({ mode: 'open' });
+        shadowRoot.appendChild(document.importNode(this, true));
+      };
+      document.registerElement('primer-box', {
+          prototype: ElementPrototype
+      });
+    })()
+
+  </script>
+</body>
+</html>
