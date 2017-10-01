@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <script type="text/javascript">
+    
+    var githubPrimer = {};
+
+    (function() {
+
+      function _applyTemplates(ownerDocument, shadowRoot) {
+        Array.from(ownerDocument.getElementsByTagName("template"))
+          .forEach((template) => {
+            var clone = document.importNode(template.content, true);
+            shadowRoot.appendChild(clone);
+          });
+      }
+
+      githubPrimer['registerElement'] = (name, options) => {
+
+        if (!options) {
+          options = {};
+        }
+
+        if (options['prototype'] !== undefined) {
+          prototypeElement = options['prototype'];
+        } else {
+          prototypeElement = HTMLDivElement;
+        }
+
+        var ownerDocument = document.currentScript.ownerDocument;
+        var ElementPrototype = Object.create(prototypeElement.prototype);
+        ElementPrototype.createdCallback = function() {
+
+          var shadowRoot = this.attachShadow({ mode: 'open' });
+          _applyTemplates(ownerDocument, shadowRoot);
+
+          if (options['create'] !== undefined) {
+            options.create.call(this, shadowRoot, ownerDocument, document);
+          }
+
+        }
+
+        var elementOptions = {
+          prototype: ElementPrototype
+        };
+
+        if (options['extends'] !== undefined) {
+          elementOptions['extends'] = options['extends']
+        }
+
+        document.registerElement(name, elementOptions);
+
+      };
+
+      githubPrimer['propagateHostStyles'] = (styles, selector) => {
+        var i, j, n, m, curr, rules;
+        var selectorPattern = new RegExp("^" + selector);
+        var newRules = [];
+        console.log(styles);  
+        for (i=0, n=styles.length; i<n; i++) {
+          rules = styles[i].cssRules
+          for (j=0, m=rules.length; j<m; j++) {
+            curr = rules[j];
+            if (curr.selectorText === selector) {
+              newRules.push(curr.cssText.replace(selectorPattern, ":host"))
+            }
+          }
+          newRules.forEach((ruleText) => styles[i].insertRule(ruleText));
+        }
+      }
+
+    })();
+
+  </script>
+</body>
