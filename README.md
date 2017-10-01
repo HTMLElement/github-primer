@@ -3,6 +3,8 @@ GitHub Primer HTML5 Element Collection
 
 Credit for the icons and stylesheet belongs to GitHub's Design Team: http://primercss.io/
 
+Demo: https://htmlelement.github.io/github-primer/demo/
+
 ## Button
 
 Wraps the css-primer [buttons](https://github.com/primer/primer-css/tree/master/modules/primer-buttons) module.

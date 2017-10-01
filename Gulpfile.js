@@ -104,6 +104,12 @@ gulp.task('html:compile', function() {
 
 });
 
+gulp.task('upload', function() {
+  return gulp.src("./{octicons,demo,}/*.{html,svg}")
+    .pipe(plugins.debug())
+    .pipe(plugins.ghPages());
+});
+
 gulp.task('warmup', function(done) {
   runSequence(
     'clean',
