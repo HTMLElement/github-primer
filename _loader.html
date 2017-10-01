@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <script type="text/javascript">
+    
+    var githubPrimer = {};
+
+    (function() {
+
+      function _applyTemplate(ownerDocument, shadowRoot) {
+        Array.from(ownerDocument.getElementsByTagName("template"))
+          .forEach((template) => {
+            var clone = document.importNode(template.content, true);
+            shadowRoot.appendChild(clone);
+          });
+      }
+
+      githubPrimer['registerElement'] = (name, options) => {
+
+        if (!options) {
+          options = {};
+        }
+
+        if (options['prototype'] !== undefined) {
+          prototypeElement = options['prototype'];
+        } else {
+          prototypeElement = HTMLDivElement;
+        }
+
+        var ownerDocument = document.currentScript.ownerDocument;
+        var ElementPrototype = Object.create(prototypeElement.prototype);
+        ElementPrototype.createdCallback = function() {
+          var shadowRoot = this.attachShadow({ mode: 'open' });
+          _applyTemplate(ownerDocument, shadowRoot);
+
+          if (options['create'] !== undefined) {
+            options.create.call(this, shadowRoot, ownerDocument, document);
+          }
+        }
+
+        document.registerElement(name, {
+          prototype: ElementPrototype
+        });
+
+      };
+
+    })();
+
+  </script>
+</body>
