@@ -32,3 +32,19 @@ Supported button types
 <link rel="import" href="bower_components/github-primer-elements/octicon.html" />
 <primer-octicon icon="bug"></primer-octicon>
 ```
+
+## Table
+
+```html
+<link rel="import" href="bower_components/github-primer-elements/table.html" />
+<table is="prime-table">
+  <tr>
+    <th>Name</th>
+    <th>Role</th>
+  </tr>
+  <tr>
+    <td>Stefan Grönke</td>
+    <td>Maintainer</td>
+  </tr>
+</table>
+```
