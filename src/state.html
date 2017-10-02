@@ -21,7 +21,7 @@
       };
 
       githubPrimer.registerElement('primer-state', {
-        create: function (shadowRoot, ownerDocument, document) {
+        create: function (ownerDocument, document) {
 
           var labelElement = document.createElement("span");
           labelElement.classList.add('State');
@@ -39,7 +39,9 @@
               }
             });
 
+          var shadowRoot = this.attachShadow({ mode: 'open' });
           shadowRoot.appendChild(labelElement);
+          return shadowRoot;
 
         }
       });

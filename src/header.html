@@ -20,7 +20,7 @@
       }
 
       githubPrimer.registerElement('primer-header', {
-        create: function (shadowRoot, ownerDocument, document) {
+        create: function (ownerDocument, document) {
           var headerElement = document.createElement("div");
           headerElement.classList.add('jumbotron');
           
@@ -33,7 +33,9 @@
 
           headerElement.innerHTML = this.innerHTML;
 
+          var shadowRoot = this.attachShadow({ mode: 'open' });
           shadowRoot.appendChild(headerElement);
+          return shadowRoot;
         }
       });
 

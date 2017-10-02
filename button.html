@@ -13,7 +13,7 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
 
     (function() {
       githubPrimer.registerElement('primer-button', {
-        create: function (shadowRoot, ownerDocument, document) {
+        create: function (ownerDocument, document) {
 
           var el = document.createElement("button");
           el.setAttribute("type", "button");
@@ -33,7 +33,9 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
           Array.from(this.childNodes)
             .forEach((node) => el.appendChild(node))
           
+          var shadowRoot = this.attachShadow({ mode: 'open' });
           shadowRoot.appendChild(el);
+          return shadowRoot;
         }
       });
     })();

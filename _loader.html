@@ -7,12 +7,20 @@
 
     (function() {
 
-      function _applyTemplates(ownerDocument, shadowRoot) {
-        Array.from(ownerDocument.getElementsByTagName("template"))
-          .forEach((template) => {
-            var clone = document.importNode(template.content, true);
-            shadowRoot.appendChild(clone);
+      function _getOwnerDocumentTemplates(ownerDocument) {
+        return Array.from(ownerDocument.getElementsByTagName("template"))
+      }
+
+      function _cloneTemplates(templates) {
+        return templates.map((template) => {
+            return document.importNode(template.content, true);
           });
+      }
+
+      function _applyTemplates(templates, shadowRoot) {
+        _cloneTemplates(templates).forEach((content) => {
+          shadowRoot.appendChild(content);
+        });
       }
 
       githubPrimer['registerElement'] = (name, options) => {
@@ -28,27 +36,57 @@
         }
 
         var ownerDocument = document.currentScript.ownerDocument;
-        var ElementPrototype = Object.create(prototypeElement.prototype);
-        ElementPrototype.createdCallback = function() {
+        var ownerDocumentTemplates = _getOwnerDocumentTemplates(ownerDocument);
+        var onCreate = function() {
 
-          var shadowRoot = this.attachShadow({ mode: 'open' });
-          _applyTemplates(ownerDocument, shadowRoot);
+          var shadowRoot;
 
           if (options['create'] !== undefined) {
-            options.create.call(this, shadowRoot, ownerDocument, document);
+            shadowRoot = options.create.call(this, ownerDocument, document);
+          }
+          
+          if (shadowRoot === undefined) {
+            shadowRoot = this.attachShadow({ mode: 'open' });
+          }
+
+          if (shadowRoot instanceof DocumentFragment) {
+            // skipped shadowRoots are null
+            _applyTemplates(ownerDocumentTemplates, shadowRoot);
+          }
+
+          if (options['postCreate'] !== undefined) {
+            options.postCreate.call(this, shadowRoot, ownerDocument, document);
           }
 
         }
 
-        var elementOptions = {
-          prototype: ElementPrototype
-        };
+        if (document.registerElement !== undefined) {
 
-        if (options['extends'] !== undefined) {
-          elementOptions['extends'] = options['extends']
+          var ElementPrototype = Object.create(prototypeElement.prototype);
+          ElementPrototype.createdCallback = onCreate;
+
+          var elementOptions = {
+            prototype: ElementPrototype
+          };
+
+          if (options['extends'] !== undefined) {
+            elementOptions['extends'] = options['extends']
+          }
+
+          document.registerElement(name, elementOptions);
+
+        } else {
+
+          class Element extends HTMLElement {
+            constructor() {
+              super();
+              onCreate.call(this);
+            }
+          }
+
+          window.customElements.define(name, Element);
+
         }
-
-        document.registerElement(name, elementOptions);
 
       };
 
@@ -56,7 +94,6 @@
         var i, j, n, m, curr, rules;
         var selectorPattern = new RegExp("^" + selector);
         var newRules = [];
-        console.log(styles);  
         for (i=0, n=styles.length; i<n; i++) {
           rules = styles[i].cssRules
           for (j=0, m=rules.length; j<m; j++) {

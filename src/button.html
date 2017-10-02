@@ -12,7 +12,7 @@
 
     (function() {
       githubPrimer.registerElement('primer-button', {
-        create: function (shadowRoot, ownerDocument, document) {
+        create: function (ownerDocument, document) {
 
           var el = document.createElement("button");
           el.setAttribute("type", "button");
@@ -32,7 +32,9 @@
           Array.from(this.childNodes)
             .forEach((node) => el.appendChild(node))
           
+          var shadowRoot = this.attachShadow({ mode: 'open' });
           shadowRoot.appendChild(el);
+          return shadowRoot;
         }
       });
     })();

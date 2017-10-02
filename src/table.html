@@ -11,15 +11,10 @@
       iconCache = {};
 
       githubPrimer.registerElement('primer-table', {
-        create: function (shadowRoot, ownerDocument, document) {
+        create: function (ownerDocument, document) {
 
           var tbody = document.createElement('tbody');
           tbody.classList.add('data-table');
-
-          githubPrimer.propagateHostStyles(
-            shadowRoot.styleSheets,
-            '.data-table'
-          );
 
           var tableContent = this.getElementsByTagName('tbody');
           if (tableContent.length > 0) {
@@ -30,8 +25,16 @@
             });
           }
 
+          var shadowRoot = this.attachShadow({ mode: 'open' });
           shadowRoot.appendChild(tbody);
+          return shadowRoot;
 
+        },
+        postCreate: function(shadowRoot, ownerDocument, document) {
+          githubPrimer.propagateHostStyles(
+            shadowRoot.styleSheets,
+            '.data-table'
+          );
         },
         extends: 'table'
       });

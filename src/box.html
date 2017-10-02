@@ -54,7 +54,7 @@
       }
 
       githubPrimer.registerElement('primer-box', {
-        create: function (shadowRoot, ownerDocument, document) {
+        create: function (ownerDocument, document) {
 
           var boxElement = document.createElement('div');
           boxElement.classList.add('Box');
@@ -79,7 +79,9 @@
               .forEach((node) => boxElement.appendChild(node));
           }
 
+          var shadowRoot = this.attachShadow({ mode: 'open' });
           shadowRoot.appendChild(boxElement);
+          return shadowRoot;
 
         }
       });

@@ -21,7 +21,7 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
       }
 
       githubPrimer.registerElement('primer-header', {
-        create: function (shadowRoot, ownerDocument, document) {
+        create: function (ownerDocument, document) {
           var headerElement = document.createElement("div");
           headerElement.classList.add('jumbotron');
           
@@ -34,7 +34,9 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
 
           headerElement.innerHTML = this.innerHTML;
 
+          var shadowRoot = this.attachShadow({ mode: 'open' });
           shadowRoot.appendChild(headerElement);
+          return shadowRoot;
         }
       });
 
