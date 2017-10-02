@@ -55,7 +55,7 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
       }
 
       githubPrimer.registerElement('primer-box', {
-        create: function (shadowRoot, ownerDocument, document) {
+        create: function (ownerDocument, document) {
 
           var boxElement = document.createElement('div');
           boxElement.classList.add('Box');
@@ -80,7 +80,9 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
               .forEach((node) => boxElement.appendChild(node));
           }
 
+          var shadowRoot = this.attachShadow({ mode: 'open' });
           shadowRoot.appendChild(boxElement);
+          return shadowRoot;
 
         }
       });

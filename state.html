@@ -22,7 +22,7 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
       };
 
       githubPrimer.registerElement('primer-state', {
-        create: function (shadowRoot, ownerDocument, document) {
+        create: function (ownerDocument, document) {
 
           var labelElement = document.createElement("span");
           labelElement.classList.add('State');
@@ -40,7 +40,9 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
               }
             });
 
+          var shadowRoot = this.attachShadow({ mode: 'open' });
           shadowRoot.appendChild(labelElement);
+          return shadowRoot;
 
         }
       });

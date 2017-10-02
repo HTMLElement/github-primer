@@ -20,7 +20,7 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
       };
 
       githubPrimer.registerElement('primer-counter', {
-        create: function (shadowRoot, ownerDocument, document) {
+        create: function (ownerDocument, document) {
 
           var labelElement = document.createElement("span");
           labelElement.classList.add('Counter');
@@ -38,7 +38,9 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
               }
             });
 
+          var shadowRoot = this.attachShadow({ mode: 'open' });
           shadowRoot.appendChild(labelElement);
+          return shadowRoot;
 
         }
       });

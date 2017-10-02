@@ -1,8 +1,8 @@
-body {
+html body {
   margin: 50px;
 }
 
-section {
+body section {
   padding-top: 15px;
   padding-bottom: 15px;
 }

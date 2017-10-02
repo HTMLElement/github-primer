@@ -7,20 +7,29 @@
       iconCache = {};
 
       githubPrimer.registerElement('primer-octicon', {
-        create: function (shadowRoot, ownerDocument, document) {
+        create: function (ownerDocument, document) {
 
-          var sourcePath = ownerDocument.baseURI.replace(/\/[^\\/]+$/, "") + "/octicons/";
+          var sourcePath = "../octicons/"
           var iconName = this.getAttribute("icon");
-
-          if (iconCache[iconName] === undefined) {
-            iconCache[iconName] = fetch(sourcePath + iconName + ".svg")
-              .then((result) => result.text())
+          
+          if (!iconCache.hasOwnProperty(iconName)) {
+            iconCache[iconName] = new Promise((resolve, reject) => {
+              fetch(sourcePath + iconName + ".svg")
+                .then((result) => {
+                  text = result.text();
+                  resolve(text);
+                });
+            });
           }
 
           iconCache[iconName]
             .then((text) => {
-              shadowRoot.innerHTML = text;
+              this.innerHTML = text;
+              return text
             });
+
+          return null;
+
         }
       });
 

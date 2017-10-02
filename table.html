@@ -12,15 +12,10 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
       iconCache = {};
 
       githubPrimer.registerElement('primer-table', {
-        create: function (shadowRoot, ownerDocument, document) {
+        create: function (ownerDocument, document) {
 
           var tbody = document.createElement('tbody');
           tbody.classList.add('data-table');
-
-          githubPrimer.propagateHostStyles(
-            shadowRoot.styleSheets,
-            '.data-table'
-          );
 
           var tableContent = this.getElementsByTagName('tbody');
           if (tableContent.length > 0) {
@@ -31,8 +26,16 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
             });
           }
 
+          var shadowRoot = this.attachShadow({ mode: 'open' });
           shadowRoot.appendChild(tbody);
+          return shadowRoot;
 
+        },
+        postCreate: function(shadowRoot, ownerDocument, document) {
+          githubPrimer.propagateHostStyles(
+            shadowRoot.styleSheets,
+            '.data-table'
+          );
         },
         extends: 'table'
       });

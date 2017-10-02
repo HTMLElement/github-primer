@@ -9,6 +9,27 @@
 		<link rel="import" href="../counter.html" />
 		<link rel="import" href="../octicon.html" />
 		<link rel="import" href="../table.html" />
+		<script type="text/javascript">
+
+			(function() {
+
+				function supportsCustomElements() {
+					return (window.customElements !== undefined)
+				}
+
+				function supportsImports() {
+				  return 'import' in document.createElement('link');
+				}
+				
+				if (!supportsImports() || !supportsCustomElements()) {
+					var polyfill = document.createElement('script');
+					polyfill.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.14/webcomponents-loader.js';
+					document.head.prepend(polyfill);
+				};
+
+			})()
+
+		</script>
 		<link rel="stylesheet" href="./demo.css" />
 	</head>
 	<body>
