@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="import" href="_loader.html" />
+</head>
+<body>
+  <template>
+    <style inline type="text/css" src="../css/base.css"></style>
+    <style inline type="text/css" src="../css/menu.css"></style>
+  </template>
+  <script>
+
+    (function() {
+      githubPrimer.registerElement('primer-menu', {
+        create: function (ownerDocument, document) {
+
+          var nav = document.createElement('nav');
+
+          if (this.hasAttribute('aria-label')) {
+            nav.setAttribute('aria-label', this.getAttribute('aria-label'));
+          }
+
+          children = Array.from(this.children);
+          var shadowRoot = this.attachShadow({ mode: 'open' });
+          
+          children.forEach((child, i) => {
+
+            child.classList.add('menu-item');
+
+            if (isChildSelected(child)) {
+              child.classList.add('selected');
+              child.setAttribute('aria-current', 'page');
+            }
+
+            nav.appendChild(child);
+
+          });
+
+          shadowRoot.appendChild(nav);
+          return shadowRoot;
+
+        }
+      });
+
+      function isChildSelected(child) {
+        if (!child.hasAttribute('selected')) {
+          return false;
+        }
+        return (child.getAttribute('selected').toLowerCase() !== 'false');
+      }
+
+    })();
+
+  </script>
+</body>
+</html>
