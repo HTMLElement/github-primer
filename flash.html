@@ -27,8 +27,8 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
           var shadowRoot = this.attachShadow({ mode: 'open' });
           content.forEach(child => {
             flashElement.appendChild(child);
-            shadowRoot.appendChild(flashElement);
           });
+          shadowRoot.appendChild(flashElement);
           
           return shadowRoot;
          
