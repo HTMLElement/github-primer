@@ -1,5 +1,7 @@
 <html>
   <head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/0.7.24/HTMLImports.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.14/webcomponents-sd-ce.js"></script>
     <link rel="import" href="../base.html" />
     <link rel="import" href="../box.html" />
     <link rel="import" href="../button.html" />
@@ -9,27 +11,6 @@
     <link rel="import" href="../counter.html" />
     <link rel="import" href="../octicon.html" />
     <link rel="import" href="../table.html" />
-    <script type="text/javascript">
-
-      (function() {
-
-        function supportsCustomElements() {
-          return (window.customElements !== undefined)
-        }
-
-        function supportsImports() {
-          return 'import' in document.createElement('link');
-        }
-        
-        if (!supportsImports() || !supportsCustomElements()) {
-          var polyfill = document.createElement('script');
-          polyfill.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.14/webcomponents-lite.js';
-          document.head.prepend(polyfill);
-        };
-
-      })()
-
-    </script>
     <link rel="stylesheet" href="./demo.css" />
   </head>
   <body>
