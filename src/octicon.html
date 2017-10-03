@@ -4,30 +4,13 @@
 
     (function() {
 
-      iconCache = {};
-
       githubPrimer.registerElement('primer-octicon', {
         create: function (ownerDocument, document) {
 
-          var sourcePath = "../octicons/"
-          var iconName = this.getAttribute("icon");
+          var icon = this.getAttribute('icon');
+          var svg = ownerDocument.getElementById(icon).content.children[0];
+          this.appendChild(svg);
           
-          if (!iconCache.hasOwnProperty(iconName)) {
-            iconCache[iconName] = new Promise((resolve, reject) => {
-              fetch(sourcePath + iconName + ".svg")
-                .then((result) => {
-                  text = result.text();
-                  resolve(text);
-                });
-            });
-          }
-
-          iconCache[iconName]
-            .then((text) => {
-              this.innerHTML = text;
-              return text
-            });
-
           return null;
 
         }
@@ -36,5 +19,564 @@
     })();
 
   </script>
+
+  <!--
+  
+  MIT License
+
+  Copyright (c) 2012-2016 GitHub, Inc.
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+
+  -->
+
+  <template id="alert">
+    <img inline src="../octicons/alert.svg" />
+  </template>
+  <template id="arrow-down">
+    <img inline src="../octicons/arrow-down.svg" />
+  </template>
+  <template id="arrow-left">
+    <img inline src="../octicons/arrow-left.svg" />
+  </template>
+  <template id="arrow-right">
+    <img inline src="../octicons/arrow-right.svg" />
+  </template>
+  <template id="arrow-small-down">
+    <img inline src="../octicons/arrow-small-down.svg" />
+  </template>
+  <template id="arrow-small-left">
+    <img inline src="../octicons/arrow-small-left.svg" />
+  </template>
+  <template id="arrow-small-right">
+    <img inline src="../octicons/arrow-small-right.svg" />
+  </template>
+  <template id="arrow-small-up">
+    <img inline src="../octicons/arrow-small-up.svg" />
+  </template>
+  <template id="arrow-up">
+    <img inline src="../octicons/arrow-up.svg" />
+  </template>
+  <template id="beaker">
+    <img inline src="../octicons/beaker.svg" />
+  </template>
+  <template id="bell">
+    <img inline src="../octicons/bell.svg" />
+  </template>
+  <template id="bold">
+    <img inline src="../octicons/bold.svg" />
+  </template>
+  <template id="book">
+    <img inline src="../octicons/book.svg" />
+  </template>
+  <template id="bookmark">
+    <img inline src="../octicons/bookmark.svg" />
+  </template>
+  <template id="briefcase">
+    <img inline src="../octicons/briefcase.svg" />
+  </template>
+  <template id="broadcast">
+    <img inline src="../octicons/broadcast.svg" />
+  </template>
+  <template id="browser">
+    <img inline src="../octicons/browser.svg" />
+  </template>
+  <template id="bug">
+    <img inline src="../octicons/bug.svg" />
+  </template>
+  <template id="calendar">
+    <img inline src="../octicons/calendar.svg" />
+  </template>
+  <template id="check">
+    <img inline src="../octicons/check.svg" />
+  </template>
+  <template id="checklist">
+    <img inline src="../octicons/checklist.svg" />
+  </template>
+  <template id="chevron-down">
+    <img inline src="../octicons/chevron-down.svg" />
+  </template>
+  <template id="chevron-left">
+    <img inline src="../octicons/chevron-left.svg" />
+  </template>
+  <template id="chevron-right">
+    <img inline src="../octicons/chevron-right.svg" />
+  </template>
+  <template id="chevron-up">
+    <img inline src="../octicons/chevron-up.svg" />
+  </template>
+  <template id="circle-slash">
+    <img inline src="../octicons/circle-slash.svg" />
+  </template>
+  <template id="circuit-board">
+    <img inline src="../octicons/circuit-board.svg" />
+  </template>
+  <template id="clippy">
+    <img inline src="../octicons/clippy.svg" />
+  </template>
+  <template id="clock">
+    <img inline src="../octicons/clock.svg" />
+  </template>
+  <template id="cloud-download">
+    <img inline src="../octicons/cloud-download.svg" />
+  </template>
+  <template id="cloud-upload">
+    <img inline src="../octicons/cloud-upload.svg" />
+  </template>
+  <template id="code">
+    <img inline src="../octicons/code.svg" />
+  </template>
+  <template id="comment-discussion">
+    <img inline src="../octicons/comment-discussion.svg" />
+  </template>
+  <template id="comment">
+    <img inline src="../octicons/comment.svg" />
+  </template>
+  <template id="credit-card">
+    <img inline src="../octicons/credit-card.svg" />
+  </template>
+  <template id="dash">
+    <img inline src="../octicons/dash.svg" />
+  </template>
+  <template id="dashboard">
+    <img inline src="../octicons/dashboard.svg" />
+  </template>
+  <template id="database">
+    <img inline src="../octicons/database.svg" />
+  </template>
+  <template id="desktop-download">
+    <img inline src="../octicons/desktop-download.svg" />
+  </template>
+  <template id="device-camera-video">
+    <img inline src="../octicons/device-camera-video.svg" />
+  </template>
+  <template id="device-camera">
+    <img inline src="../octicons/device-camera.svg" />
+  </template>
+  <template id="device-desktop">
+    <img inline src="../octicons/device-desktop.svg" />
+  </template>
+  <template id="device-mobile">
+    <img inline src="../octicons/device-mobile.svg" />
+  </template>
+  <template id="diff-added">
+    <img inline src="../octicons/diff-added.svg" />
+  </template>
+  <template id="diff-ignored">
+    <img inline src="../octicons/diff-ignored.svg" />
+  </template>
+  <template id="diff-modified">
+    <img inline src="../octicons/diff-modified.svg" />
+  </template>
+  <template id="diff-removed">
+    <img inline src="../octicons/diff-removed.svg" />
+  </template>
+  <template id="diff-renamed">
+    <img inline src="../octicons/diff-renamed.svg" />
+  </template>
+  <template id="diff">
+    <img inline src="../octicons/diff.svg" />
+  </template>
+  <template id="ellipsis">
+    <img inline src="../octicons/ellipsis.svg" />
+  </template>
+  <template id="eye">
+    <img inline src="../octicons/eye.svg" />
+  </template>
+  <template id="file-binary">
+    <img inline src="../octicons/file-binary.svg" />
+  </template>
+  <template id="file-code">
+    <img inline src="../octicons/file-code.svg" />
+  </template>
+  <template id="file-directory">
+    <img inline src="../octicons/file-directory.svg" />
+  </template>
+  <template id="file-media">
+    <img inline src="../octicons/file-media.svg" />
+  </template>
+  <template id="file-pdf">
+    <img inline src="../octicons/file-pdf.svg" />
+  </template>
+  <template id="file-submodule">
+    <img inline src="../octicons/file-submodule.svg" />
+  </template>
+  <template id="file-symlink-directory">
+    <img inline src="../octicons/file-symlink-directory.svg" />
+  </template>
+  <template id="file-symlink-file">
+    <img inline src="../octicons/file-symlink-file.svg" />
+  </template>
+  <template id="file-text">
+    <img inline src="../octicons/file-text.svg" />
+  </template>
+  <template id="file-zip">
+    <img inline src="../octicons/file-zip.svg" />
+  </template>
+  <template id="file">
+    <img inline src="../octicons/file.svg" />
+  </template>
+  <template id="flame">
+    <img inline src="../octicons/flame.svg" />
+  </template>
+  <template id="fold">
+    <img inline src="../octicons/fold.svg" />
+  </template>
+  <template id="gear">
+    <img inline src="../octicons/gear.svg" />
+  </template>
+  <template id="gift">
+    <img inline src="../octicons/gift.svg" />
+  </template>
+  <template id="gist-secret">
+    <img inline src="../octicons/gist-secret.svg" />
+  </template>
+  <template id="gist">
+    <img inline src="../octicons/gist.svg" />
+  </template>
+  <template id="git-branch">
+    <img inline src="../octicons/git-branch.svg" />
+  </template>
+  <template id="git-commit">
+    <img inline src="../octicons/git-commit.svg" />
+  </template>
+  <template id="git-compare">
+    <img inline src="../octicons/git-compare.svg" />
+  </template>
+  <template id="git-merge">
+    <img inline src="../octicons/git-merge.svg" />
+  </template>
+  <template id="git-pull-request">
+    <img inline src="../octicons/git-pull-request.svg" />
+  </template>
+  <template id="globe">
+    <img inline src="../octicons/globe.svg" />
+  </template>
+  <template id="grabber">
+    <img inline src="../octicons/grabber.svg" />
+  </template>
+  <template id="graph">
+    <img inline src="../octicons/graph.svg" />
+  </template>
+  <template id="heart">
+    <img inline src="../octicons/heart.svg" />
+  </template>
+  <template id="history">
+    <img inline src="../octicons/history.svg" />
+  </template>
+  <template id="home">
+    <img inline src="../octicons/home.svg" />
+  </template>
+  <template id="horizontal-rule">
+    <img inline src="../octicons/horizontal-rule.svg" />
+  </template>
+  <template id="hubot">
+    <img inline src="../octicons/hubot.svg" />
+  </template>
+  <template id="inbox">
+    <img inline src="../octicons/inbox.svg" />
+  </template>
+  <template id="info">
+    <img inline src="../octicons/info.svg" />
+  </template>
+  <template id="issue-closed">
+    <img inline src="../octicons/issue-closed.svg" />
+  </template>
+  <template id="issue-opened">
+    <img inline src="../octicons/issue-opened.svg" />
+  </template>
+  <template id="issue-reopened">
+    <img inline src="../octicons/issue-reopened.svg" />
+  </template>
+  <template id="italic">
+    <img inline src="../octicons/italic.svg" />
+  </template>
+  <template id="jersey">
+    <img inline src="../octicons/jersey.svg" />
+  </template>
+  <template id="kebab-horizontal">
+    <img inline src="../octicons/kebab-horizontal.svg" />
+  </template>
+  <template id="kebab-vertical">
+    <img inline src="../octicons/kebab-vertical.svg" />
+  </template>
+  <template id="key">
+    <img inline src="../octicons/key.svg" />
+  </template>
+  <template id="keyboard">
+    <img inline src="../octicons/keyboard.svg" />
+  </template>
+  <template id="law">
+    <img inline src="../octicons/law.svg" />
+  </template>
+  <template id="light-bulb">
+    <img inline src="../octicons/light-bulb.svg" />
+  </template>
+  <template id="link-external">
+    <img inline src="../octicons/link-external.svg" />
+  </template>
+  <template id="link">
+    <img inline src="../octicons/link.svg" />
+  </template>
+  <template id="list-ordered">
+    <img inline src="../octicons/list-ordered.svg" />
+  </template>
+  <template id="list-unordered">
+    <img inline src="../octicons/list-unordered.svg" />
+  </template>
+  <template id="location">
+    <img inline src="../octicons/location.svg" />
+  </template>
+  <template id="lock">
+    <img inline src="../octicons/lock.svg" />
+  </template>
+  <template id="logo-gist">
+    <img inline src="../octicons/logo-gist.svg" />
+  </template>
+  <template id="logo-github">
+    <img inline src="../octicons/logo-github.svg" />
+  </template>
+  <template id="mail-read">
+    <img inline src="../octicons/mail-read.svg" />
+  </template>
+  <template id="mail-reply">
+    <img inline src="../octicons/mail-reply.svg" />
+  </template>
+  <template id="mail">
+    <img inline src="../octicons/mail.svg" />
+  </template>
+  <template id="mark-github">
+    <img inline src="../octicons/mark-github.svg" />
+  </template>
+  <template id="markdown">
+    <img inline src="../octicons/markdown.svg" />
+  </template>
+  <template id="megaphone">
+    <img inline src="../octicons/megaphone.svg" />
+  </template>
+  <template id="mention">
+    <img inline src="../octicons/mention.svg" />
+  </template>
+  <template id="milestone">
+    <img inline src="../octicons/milestone.svg" />
+  </template>
+  <template id="mirror">
+    <img inline src="../octicons/mirror.svg" />
+  </template>
+  <template id="mortar-board">
+    <img inline src="../octicons/mortar-board.svg" />
+  </template>
+  <template id="mute">
+    <img inline src="../octicons/mute.svg" />
+  </template>
+  <template id="no-newline">
+    <img inline src="../octicons/no-newline.svg" />
+  </template>
+  <template id="note">
+    <img inline src="../octicons/note.svg" />
+  </template>
+  <template id="octoface">
+    <img inline src="../octicons/octoface.svg" />
+  </template>
+  <template id="organization">
+    <img inline src="../octicons/organization.svg" />
+  </template>
+  <template id="package">
+    <img inline src="../octicons/package.svg" />
+  </template>
+  <template id="paintcan">
+    <img inline src="../octicons/paintcan.svg" />
+  </template>
+  <template id="pencil">
+    <img inline src="../octicons/pencil.svg" />
+  </template>
+  <template id="person">
+    <img inline src="../octicons/person.svg" />
+  </template>
+  <template id="pin">
+    <img inline src="../octicons/pin.svg" />
+  </template>
+  <template id="plug">
+    <img inline src="../octicons/plug.svg" />
+  </template>
+  <template id="plus-small">
+    <img inline src="../octicons/plus-small.svg" />
+  </template>
+  <template id="plus">
+    <img inline src="../octicons/plus.svg" />
+  </template>
+  <template id="primitive-dot">
+    <img inline src="../octicons/primitive-dot.svg" />
+  </template>
+  <template id="primitive-square">
+    <img inline src="../octicons/primitive-square.svg" />
+  </template>
+  <template id="project">
+    <img inline src="../octicons/project.svg" />
+  </template>
+  <template id="pulse">
+    <img inline src="../octicons/pulse.svg" />
+  </template>
+  <template id="question">
+    <img inline src="../octicons/question.svg" />
+  </template>
+  <template id="quote">
+    <img inline src="../octicons/quote.svg" />
+  </template>
+  <template id="radio-tower">
+    <img inline src="../octicons/radio-tower.svg" />
+  </template>
+  <template id="reply">
+    <img inline src="../octicons/reply.svg" />
+  </template>
+  <template id="repo-clone">
+    <img inline src="../octicons/repo-clone.svg" />
+  </template>
+  <template id="repo-force-push">
+    <img inline src="../octicons/repo-force-push.svg" />
+  </template>
+  <template id="repo-forked">
+    <img inline src="../octicons/repo-forked.svg" />
+  </template>
+  <template id="repo-pull">
+    <img inline src="../octicons/repo-pull.svg" />
+  </template>
+  <template id="repo-push">
+    <img inline src="../octicons/repo-push.svg" />
+  </template>
+  <template id="repo">
+    <img inline src="../octicons/repo.svg" />
+  </template>
+  <template id="rocket">
+    <img inline src="../octicons/rocket.svg" />
+  </template>
+  <template id="rss">
+    <img inline src="../octicons/rss.svg" />
+  </template>
+  <template id="ruby">
+    <img inline src="../octicons/ruby.svg" />
+  </template>
+  <template id="screen-full">
+    <img inline src="../octicons/screen-full.svg" />
+  </template>
+  <template id="screen-normal">
+    <img inline src="../octicons/screen-normal.svg" />
+  </template>
+  <template id="search">
+    <img inline src="../octicons/search.svg" />
+  </template>
+  <template id="server">
+    <img inline src="../octicons/server.svg" />
+  </template>
+  <template id="settings">
+    <img inline src="../octicons/settings.svg" />
+  </template>
+  <template id="shield">
+    <img inline src="../octicons/shield.svg" />
+  </template>
+  <template id="sign-in">
+    <img inline src="../octicons/sign-in.svg" />
+  </template>
+  <template id="sign-out">
+    <img inline src="../octicons/sign-out.svg" />
+  </template>
+  <template id="smiley">
+    <img inline src="../octicons/smiley.svg" />
+  </template>
+  <template id="squirrel">
+    <img inline src="../octicons/squirrel.svg" />
+  </template>
+  <template id="star">
+    <img inline src="../octicons/star.svg" />
+  </template>
+  <template id="stop">
+    <img inline src="../octicons/stop.svg" />
+  </template>
+  <template id="sync">
+    <img inline src="../octicons/sync.svg" />
+  </template>
+  <template id="tag">
+    <img inline src="../octicons/tag.svg" />
+  </template>
+  <template id="tasklist">
+    <img inline src="../octicons/tasklist.svg" />
+  </template>
+  <template id="telescope">
+    <img inline src="../octicons/telescope.svg" />
+  </template>
+  <template id="terminal">
+    <img inline src="../octicons/terminal.svg" />
+  </template>
+  <template id="text-size">
+    <img inline src="../octicons/text-size.svg" />
+  </template>
+  <template id="three-bars">
+    <img inline src="../octicons/three-bars.svg" />
+  </template>
+  <template id="thumbsdown">
+    <img inline src="../octicons/thumbsdown.svg" />
+  </template>
+  <template id="thumbsup">
+    <img inline src="../octicons/thumbsup.svg" />
+  </template>
+  <template id="tools">
+    <img inline src="../octicons/tools.svg" />
+  </template>
+  <template id="trashcan">
+    <img inline src="../octicons/trashcan.svg" />
+  </template>
+  <template id="triangle-down">
+    <img inline src="../octicons/triangle-down.svg" />
+  </template>
+  <template id="triangle-left">
+    <img inline src="../octicons/triangle-left.svg" />
+  </template>
+  <template id="triangle-right">
+    <img inline src="../octicons/triangle-right.svg" />
+  </template>
+  <template id="triangle-up">
+    <img inline src="../octicons/triangle-up.svg" />
+  </template>
+  <template id="unfold">
+    <img inline src="../octicons/unfold.svg" />
+  </template>
+  <template id="unmute">
+    <img inline src="../octicons/unmute.svg" />
+  </template>
+  <template id="unverified">
+    <img inline src="../octicons/unverified.svg" />
+  </template>
+  <template id="verified">
+    <img inline src="../octicons/verified.svg" />
+  </template>
+  <template id="versions">
+    <img inline src="../octicons/versions.svg" />
+  </template>
+  <template id="watch">
+    <img inline src="../octicons/watch.svg" />
+  </template>
+  <template id="x">
+    <img inline src="../octicons/x.svg" />
+  </template>
+  <template id="zap">
+    <img inline src="../octicons/zap.svg" />
+  </template>
+
 </body>
 <html>
