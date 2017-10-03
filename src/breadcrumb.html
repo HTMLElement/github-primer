@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="import" href="_loader.html" />
+</head>
+<body>
+  <template>
+    <style inline type="text/css" src="../css/base.css"></style>
+    <style inline type="text/css" src="../css/breadcrumb.css"></style>
+    <style type="text/css">
+      nav ol:first-child .breadcrumb-item {
+        margin-left: 0;
+      }
+      nav ol:last-child .breadcrumb-item {
+        &::after {
+          content: none;
+        }
+      }
+    </style>
+  </template>
+  <script>
+
+    (function() {
+      githubPrimer.registerElement('primer-breadcrumb', {
+        create: function (ownerDocument, document) {
+
+          var nav = document.createElement('nav');
+          var ol = document.createElement('ol');
+          nav.appendChild(ol);
+
+          if (this.hasAttribute('aria-label')) {
+            nav.setAttribute('aria-label', this.getAttribute('aria-label'));
+          }
+
+          children = Array.from(this.children);
+          
+          children.forEach((child, i) => {
+
+              var li = document.createElement('li');
+              li.classList.add('breadcrumb-item');
+
+              if (child.hasAttribute('small')) {
+                li.classList.add('text-small');
+              }
+
+              if (child.hasAttribute('gray')) {
+                li.classList.add('text-gray');
+              }
+
+              if (i === children.length-1) {
+                li.classList.add('breadcrumb-item-selected');
+                li.setAttribute('aria-current', 'page');
+              }
+
+              li.innerHTML = child.innerHTML;
+              ol.appendChild(li);
+
+            });
+
+          var shadowRoot = this.attachShadow({ mode: 'open' });
+          shadowRoot.appendChild(nav);
+          return shadowRoot;
+        }
+      });
+
+    })();
+
+  </script>
+</body>
+</html>

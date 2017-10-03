@@ -15,6 +15,7 @@ const primer_modules = [
   "alerts",
   "base",
   "box",
+  "breadcrumb",
   "buttons",
   "markdown",
   "page-headers",
