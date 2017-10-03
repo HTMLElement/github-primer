@@ -136,13 +136,25 @@ gulp.task('styles:src', function() {
 gulp.task('html:compile', function() {
   gulp.src("src/*.html")
   .pipe(plugins.inlineSource())
+  .pipe(plugins.fileInclude({
+    indent: true
+  }))
+  .pipe(gulp.dest(dest))
+});
+
+gulp.task('update-license', function() {
+  gulp.src("src/LICENSE")
+  .pipe(plugins.fileInclude({
+    indent: true
+  }))
   .pipe(gulp.dest(dest))
 });
 
 gulp.task('upload', function() {
   return gulp.src([
     "./{octicons,demo,}/*.{html,svg,css}",
-    ".nojekyll"
+    ".nojekyll",
+    "LICENSE"
   ])
     .pipe(plugins.debug())
     .pipe(plugins.ghPages());
@@ -151,6 +163,7 @@ gulp.task('upload', function() {
 gulp.task('warmup', function(done) {
   runSequence(
     'clean',
+    'update-license',
     'styles:github',
     'styles:src',
     'copy:octicons',

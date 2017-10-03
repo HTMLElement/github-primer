@@ -1,8 +1,6 @@
 GitHub Primer HTML5 Element Collection
 ======================================
 
-Credit for the icons and stylesheet belongs to GitHub's Design Team: http://primercss.io/
-
 Demo: https://htmlelement.github.io/github-primer/demo/
 
 ## Button
@@ -48,3 +46,11 @@ Supported button types
   </tr>
 </table>
 ```
+
+# License
+
+This project includes the markdown compiler GitHub Primer [css](https://github.com/primer/primer-css/) and [octicons](https://github.com/primer/octicons).
+
+The WebComponents built from it are licenced under MIT.
+
+Please see [LICENCE](https://htmlelement.github.io/github-primer/LICENSE) for detailed information and license texts.
