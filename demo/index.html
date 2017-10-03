@@ -8,6 +8,7 @@
     <link rel="import" href="../header.html" />
     <link rel="import" href="../label.html" />
     <link rel="import" href="../flash.html" />
+    <link rel="import" href="../markdown.html" />
     <link rel="import" href="../state.html" />
     <link rel="import" href="../counter.html" />
     <link rel="import" href="../octicon.html" />
@@ -65,6 +66,39 @@
       <primer-flash type="error">Error</primer-flash>
       <br>
       <primer-flash type="success">Success</primer-flash>
+    </section>
+
+    <section id="primer-markdown">
+      <h2>primer-markdown</h2>
+      <table class="primer-markdown-preview">
+        <tr>
+          <th>Input Markdown</th>
+          <th>Rendered HTML</th>
+        </tr>
+        <tr>
+          <td>
+            <pre>&lt;primer-markdown&gt;
+    ## About Markdown
+    - Markdown can be be inlined in primer-markdown.
+
+    ### Indention
+    The first non-empty line defines the indention of 
+    the whole paragraph. This behavior can be disabled.
+&lt;/primer-markdown&gt;</pre>
+          </td>
+          <td>
+            <primer-markdown>
+              ## About Markdown
+              - Markdown can be be inlined in primer-markdown.
+
+              ### Indention
+              The first non-empty line defines the indention of 
+              the whole paragraph. This behavior can be disabled.
+            </primer-markdown>
+          </td>
+        </tr>
+      </table>
+      
     </section>
 
     <section id="primer-label">
@@ -306,6 +340,9 @@
       </primer-tooltip>
       <primer-tooltip direction="sw" aria-label="This Tooltip is below the element">
         <primer-button>Tooltip South-West</primer-button>
+      </primer-tooltip>
+      <primer-tooltip direction="sw" no-delay aria-label="This Tooltip is below the element">
+        <primer-button>Tooltip without delay</primer-button>
       </primer-tooltip>
     </section>
 

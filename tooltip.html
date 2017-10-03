@@ -18,6 +18,7 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
           var content = Array.from(this.childNodes);
           var label = this.hasAttribute('aria-label') ? this.getAttribute('aria-label') : '';
           var tooltipDirection = this.hasAttribute('direction') ? this.getAttribute('direction') : null;
+          var tooltipNodelay = this.hasAttribute('no-delay');
 
           var shadowRoot = this.attachShadow({ mode: 'open' });
           content.forEach(child => {
@@ -27,6 +28,11 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
               if (tooltipDirection !== null) {
                 child.classList.add('tooltipped-' + tooltipDirection);
               }
+
+              if (tooltipNodelay) {
+                child.classList.add('tooltipped-no-delay'); 
+              }
+
               child.setAttribute('aria-label', label);
             }
             shadowRoot.appendChild(child);
