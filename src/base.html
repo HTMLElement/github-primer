@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <style inline type="text/css" src="../css/base.css"></style>
-</head>
+<body>
+  <template id="base-style">
+    <style inline type="text/css" src="../css/base.css"></style>
+  </template>
+  <script type="text/javascript">
+    var ownerDocument = document._currentScript.ownerDocument;
+    var template = ownerDocument.getElementById('base-style');
+    var style = template.content.children[0];
+    document.head.prepend(style);
+  </script>
+</body>
 </html>
