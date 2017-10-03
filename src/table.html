@@ -9,16 +9,7 @@
     (function() {
 
       githubPrimer.registerElement('primer-table', {
-        create: function (ownerDocument, document) {
-
-          // Array.from(this.children)
-          //   .filter(child => child.tagName.toLowerCase() === 'table')
-          //   .forEach(child => {
-          //     console.log(child);
-          //     child.classList.add('data-table')
-          //   });
-
-          
+        create: function (ownerDocument, document) {         
 
           var content = Array.from(this.children);
           var shadowRoot = this.attachShadow({ mode: 'open' });
