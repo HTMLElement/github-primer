@@ -8,7 +8,7 @@
     (function() {
 
       function _getOwnerDocumentTemplates(ownerDocument) {
-        return Array.from(ownerDocument.getElementsByTagName("template"))
+        return Array.from(ownerDocument.getElementsByTagName("template"));
       }
 
       function _cloneTemplates(templates) {
@@ -18,6 +18,7 @@
       }
 
       function _applyTemplates(templates, shadowRoot) {
+        
         _cloneTemplates(templates).forEach((content) => {
           shadowRoot.appendChild(content);
         });
@@ -35,7 +36,7 @@
           prototypeElement = HTMLDivElement;
         }
 
-        var ownerDocument = document.currentScript.ownerDocument;
+        var ownerDocument = document._currentScript.ownerDocument;
         var ownerDocumentTemplates = _getOwnerDocumentTemplates(ownerDocument);
         var onCreate = function() {
 
@@ -49,44 +50,32 @@
             shadowRoot = this.attachShadow({ mode: 'open' });
           }
 
-          if (shadowRoot instanceof DocumentFragment) {
+          if (shadowRoot !== null) {
             // skipped shadowRoots are null
-            _applyTemplates(ownerDocumentTemplates, shadowRoot);
+            setTimeout(() => {
+              _applyTemplates(ownerDocumentTemplates, shadowRoot);
+            }, 0);
           }
 
           if (options['postCreate'] !== undefined) {
-            options.postCreate.call(this, shadowRoot, ownerDocument, document);
+            setTimeout(() => {
+              var element = (shadowRoot !== null) ? shadowRoot : this;
+              options.postCreate.call(this, element, ownerDocument, document);
+            }, 0);
           }
 
         }
 
-        if (document.registerElement !== undefined) {
-
-          var ElementPrototype = Object.create(prototypeElement.prototype);
-          ElementPrototype.createdCallback = onCreate;
-
-          var elementOptions = {
-            prototype: ElementPrototype
-          };
-
-          if (options['extends'] !== undefined) {
-            elementOptions['extends'] = options['extends']
-          }
-
-          document.registerElement(name, elementOptions);
-
-        } else {
-
-          class Element extends HTMLElement {
-            constructor() {
-              super();
+        class Element extends HTMLElement {
+          constructor() {
+            super();
+            setTimeout(() => {
               onCreate.call(this);
-            }
+            }, 0);
           }
-
-          window.customElements.define(name, Element);
-
         }
+
+        window.customElements.define(name, Element);
 
       };
 

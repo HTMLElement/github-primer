@@ -9,35 +9,32 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
 
     (function() {
 
-      iconCache = {};
-
       githubPrimer.registerElement('primer-table', {
         create: function (ownerDocument, document) {
 
-          var tbody = document.createElement('tbody');
-          tbody.classList.add('data-table');
+          // Array.from(this.children)
+          //   .filter(child => child.tagName.toLowerCase() === 'table')
+          //   .forEach(child => {
+          //     console.log(child);
+          //     child.classList.add('data-table')
+          //   });
 
-          var tableContent = this.getElementsByTagName('tbody');
-          if (tableContent.length > 0) {
-            Array.from(tableContent[0].childNodes)
-            .filter(child => (child instanceof HTMLElement))
-            .forEach(child => {
-              tbody.appendChild(child)
-            });
-          }
+          
 
+          var content = Array.from(this.children);
           var shadowRoot = this.attachShadow({ mode: 'open' });
-          shadowRoot.appendChild(tbody);
+          content.forEach(child => {
+
+            if (child instanceof HTMLTableElement) {
+              child.classList.add('data-table')
+            }
+
+            shadowRoot.appendChild(child);
+
+          });
           return shadowRoot;
 
-        },
-        postCreate: function(shadowRoot, ownerDocument, document) {
-          githubPrimer.propagateHostStyles(
-            shadowRoot.styleSheets,
-            '.data-table'
-          );
-        },
-        extends: 'table'
+        }
       });
 
     })();
