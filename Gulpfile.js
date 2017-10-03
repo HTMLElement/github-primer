@@ -125,6 +125,7 @@ gulp.task('styles:src', function() {
   })
   .pipe(plugins.plumber({
     errorHandler: function(error) {
+      console.error(error);
       this.emit('skip');
     }
   }))
