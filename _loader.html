@@ -55,38 +55,24 @@
           }
 
           if (options['postCreate'] !== undefined) {
-            options.postCreate.call(this, shadowRoot, ownerDocument, document);
+            setTimeout(() => {
+              var element = (shadowRoot !== null) ? shadowRoot : this;
+              options.postCreate.call(this, element, ownerDocument, document);
+            }, 0);
           }
 
         }
 
-        if (document.registerElement !== undefined) {
-
-          var ElementPrototype = Object.create(prototypeElement.prototype);
-          ElementPrototype.createdCallback = onCreate;
-
-          var elementOptions = {
-            prototype: ElementPrototype
-          };
-
-          if (options['extends'] !== undefined) {
-            elementOptions['extends'] = options['extends']
-          }
-
-          document.registerElement(name, elementOptions);
-
-        } else {
-
-          class Element extends HTMLElement {
-            constructor() {
-              super();
+        class Element extends HTMLElement {
+          constructor() {
+            super();
+            setTimeout(() => {
               onCreate.call(this);
-            }
+            }, 0);
           }
-
-          window.customElements.define(name, Element);
-
         }
+
+        window.customElements.define(name, Element);
 
       };
 
