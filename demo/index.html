@@ -12,6 +12,7 @@
     <link rel="import" href="../counter.html" />
     <link rel="import" href="../octicon.html" />
     <link rel="import" href="../table.html" />
+    <link rel="import" href="../tooltip.html" />
     <link rel="stylesheet" href="./demo.css" />
   </head>
   <body>
@@ -295,6 +296,20 @@
         </table>
       </primer-table>
 
+    </section>
+
+    <section id="primer-tooltip">
+      <h2>primer-tooltip</h2>
+      <br>
+      <primer-tooltip direction="ne" aria-label="This Tooltip is above the element">
+        <primer-button>Tooltip North-East</primer-button>
+      </primer-tooltip>
+      <primer-tooltip direction="sw" aria-label="This Tooltip is below the element">
+        <primer-button>Tooltip South-West</primer-button>
+      </primer-tooltip>
+      <primer-tooltip direction="sw" no-delay aria-label="This Tooltip is below the element">
+        <primer-button>Tooltip without delay</primer-button>
+      </primer-tooltip>
     </section>
 
   </body>

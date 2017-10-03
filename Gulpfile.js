@@ -17,7 +17,8 @@ const primer_modules = [
   "box",
   "buttons",
   "page-headers",
-  "tables"
+  "tables",
+  "tooltips"
 ];
 
 css_dir = "./css"

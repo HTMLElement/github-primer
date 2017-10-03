@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="import" href="_loader.html" />
+</head>
+<body>
+  <template>
+    <style inline type="text/css" src="../css/base.css"></style>
+    <style inline type="text/css" src="../css/tooltips.css"></style>
+  </template>
+  <script>
+
+    (function() {
+      githubPrimer.registerElement('primer-tooltip', {
+        create: function (ownerDocument, document) {
+
+          var content = Array.from(this.childNodes);
+          var label = this.hasAttribute('aria-label') ? this.getAttribute('aria-label') : '';
+          var tooltipDirection = this.hasAttribute('direction') ? this.getAttribute('direction') : null;
+          var tooltipNodelay = this.hasAttribute('no-delay');
+
+          var shadowRoot = this.attachShadow({ mode: 'open' });
+          content.forEach(child => {
+            if (child instanceof HTMLElement) {
+              child.classList.add('tooltipped');
+
+              if (tooltipDirection !== null) {
+                child.classList.add('tooltipped-' + tooltipDirection);
+              }
+
+              if (tooltipNodelay) {
+                child.classList.add('tooltipped-no-delay'); 
+              }
+
+              child.setAttribute('aria-label', label);
+            }
+            shadowRoot.appendChild(child);
+          });
+          
+          return shadowRoot;
+         
+        }
+      });
+    })();
+
+  </script>
+</body>
+</html>
