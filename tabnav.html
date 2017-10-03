@@ -31,28 +31,73 @@ html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:1
           children.forEach((child, i) => {
 
             if (child.tagName.toLowerCase() === "item") {
+
               child.classList.add('tabnav-tab');
-              if (isChildSelected(child)) {
-                child.classList.add('selected');
-                child.setAttribute('aria-current', 'page');
-              }
+              child.addEventListener('click', selectItemOnRootElement(nav));
               nav.appendChild(child);
+
             } else {
+
               child.classList.add('float-right');
               if (isTabnavExtra(child)) {
                 child.classList.add('tabnav-extra');
               }
               div.appendChild(child);
+
             }
 
           });
 
+          updateChildren(nav);
           div.appendChild(nav);
           shadowRoot.appendChild(div);
           return shadowRoot;
 
         }
       });
+
+      function updateChildren(rootElement) {
+        Array.from(rootElement.children)
+          .forEach(child => {
+            if (isChildSelected(child)) {
+              child.classList.add('selected');
+              child.setAttribute('aria-current', 'page');
+            } else {
+              child.classList.remove('selected');
+              if (child.hasAttribute('aria-current')) {
+                child.removeAttribute('aria-current');
+              }
+            }
+          });
+      }
+
+      function selectItemOnRootElement(rootElement) {
+        return function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          target = event.target;
+          while (!target.classList.contains('tabnav-tab')) {
+            target = target.parentNode;
+          }
+          newSelection = target
+
+          // deselect existing
+          Array.from(rootElement.children)
+            .filter(child => child != newSelection)
+            .forEach(child => {
+              if (child.hasAttribute('selected')) {
+                child.removeAttribute('selected');
+              }
+            });
+
+          // select new item
+          newSelection.setAttribute('selected', true);
+
+          updateChildren(rootElement);
+
+        }
+      }
 
       function isChildSelected(child) {
         if (!child.hasAttribute('selected')) {
