@@ -12,6 +12,7 @@ const primer_modules_dir = './node_modules/'
 //   .filter(x => x != "primer-css")
 //   .map(x => x.substr(7));
 const primer_modules = [
+  "alerts",
   "base",
   "box",
   "buttons",

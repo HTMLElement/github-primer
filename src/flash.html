@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="import" href="_loader.html" />
+</head>
+<body>
+  <template>
+    <style inline type="text/css" src="../css/base.css"></style>
+    <style inline type="text/css" src="../css/alerts.css"></style>
+  </template>
+  <script>
+
+    (function() {
+      githubPrimer.registerElement('primer-flash', {
+        create: function (ownerDocument, document) {
+
+          var content = Array.from(this.childNodes);
+          var flashElement = document.createElement('div');
+          flashElement.classList.add('flash');
+
+          if (this.hasAttribute("type")) {
+            var type = this.getAttribute("type");
+            flashElement.classList.add('flash-' + type);
+          }
+
+          var shadowRoot = this.attachShadow({ mode: 'open' });
+          content.forEach(child => {
+            flashElement.appendChild(child);
+          });
+          shadowRoot.appendChild(flashElement);
+          
+          return shadowRoot;
+         
+        }
+      });
+    })();
+
+  </script>
+</body>
+</html>
