@@ -6,3 +6,16 @@ body section {
   padding-top: 15px;
   padding-bottom: 15px;
 }
+
+table.primer-markdown-preview {
+  width: 100%;
+  margin-top: 15px;
+}
+
+table.primer-markdown-preview th,
+table.primer-markdown-preview td {
+  vertical-align: top;
+  padding: 15px;
+  width: 50%;
+  border: 1px solid #EEE;
+}

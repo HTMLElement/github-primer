@@ -16,6 +16,7 @@ const primer_modules = [
   "base",
   "box",
   "buttons",
+  "markdown",
   "page-headers",
   "tables",
   "tooltips"

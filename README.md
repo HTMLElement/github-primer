@@ -31,6 +31,17 @@ Supported button types
 <primer-octicon icon="bug"></primer-octicon>
 ```
 
+## Markdown
+```html
+<link rel="import" href="bower_components/github-primer-elements/octicon.html" />
+<primer-markdown>
+  # Heading
+  Some Text
+  - Bullet One
+  - Bullet Two
+</primer-markdown>
+```
+
 ## Table
 
 ```html
@@ -49,7 +60,7 @@ Supported button types
 
 # License
 
-This project includes the markdown compiler GitHub Primer [css](https://github.com/primer/primer-css/) and [octicons](https://github.com/primer/octicons).
+This project includes the markdown compiler [Showdown](https://github.com/showdownjs/showdown), GitHub Primer [css](https://github.com/primer/primer-css/) and [octicons](https://github.com/primer/octicons).
 
 The WebComponents built from it are licenced under MIT.
 

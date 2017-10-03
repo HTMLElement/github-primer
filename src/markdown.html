@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="import" href="_loader.html" />
+  <!--
+  Shoddown: https://github.com/showdownjs/showdown
+
+  @@include('../node_modules/showdown/license.txt')
+  -->
+  <script inline type="text/javascript" src="../node_modules/showdown/dist/showdown.min.js"></script>
+  
+</head>
+<body>
+  <template>
+    <style inline type="text/css" src="../css/base.css"></style>
+    <style inline type="text/css" src="../css/markdown.css"></style>
+  </template>
+  <script>
+
+    (function() {
+      githubPrimer.registerElement('primer-markdown', {
+        create: function (ownerDocument, document) {
+
+          var converter = new showdown.Converter();
+          var text = this.textContent;
+
+          if (isSmartIndentEnabled(this)) {
+            var indentionPattern = null;
+            var emptyLinePattern = /^\s*$/;
+            var whitespacePatterh = /^(\s*)/;
+
+            text = text.split('\n')
+              .map(line => {
+
+                // as long as we have not detected an indention
+                // empty lines are removed
+                if ((indentionPattern === null) && (line.match(emptyLinePattern) !== null)) {
+                  return null;
+                }
+
+                // the first non-empty line defines the indention
+                if (indentionPattern === null) {
+                  var indention = line.match(whitespacePatterh)[0].length;
+                  indentionPattern = RegExp('^(\\s{' + indention + '})')
+                }
+
+                line = line.replace(indentionPattern, '')
+                return line;
+
+              })
+              .filter(line => (line !== null))
+              .join('\n');
+
+          }
+
+          var html = converter.makeHtml(text);
+
+          var el = document.createElement('div');
+          el.classList.add('markdown-body');
+          el.innerHTML = html;
+
+          var shadowRoot = this.attachShadow({ mode: 'open' });
+          shadowRoot.appendChild(el);
+          return shadowRoot;
+
+        }
+      });
+
+      function isSmartIndentEnabled(that) {
+        if (!that.hasAttribute('smart-indent')) {
+          return true;
+        }
+        if (that.getAttribute('smart-indent').toLowerCase() !== "false") {
+          return true;
+        }
+        return false;
+      }
+    })();
+
+  </script>
+</body>
+</html>
