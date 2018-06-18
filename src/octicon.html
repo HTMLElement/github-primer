@@ -9,7 +9,7 @@
 
           var icon = this.getAttribute('icon');
           var svg = ownerDocument.getElementById(icon).content.children[0];
-          this.appendChild(svg);
+          this.appendChild(svg.cloneNode(true));
           
           return null;
 
