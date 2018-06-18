@@ -36,7 +36,8 @@
           prototypeElement = HTMLDivElement;
         }
 
-        var ownerDocument = document._currentScript.ownerDocument;
+        var currentScript = document._currentScript || document.currentScript
+        var ownerDocument = currentScript.ownerDocument;
         var ownerDocumentTemplates = _getOwnerDocumentTemplates(ownerDocument);
         var onCreate = function() {
 
