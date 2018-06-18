@@ -15,7 +15,7 @@
     "url": "https://github.com/HTMLElement/github-primer/issues"
   },
   "homepage": "https://github.com/HTMLElement/github-primer#readme",
-  "dependencies": {
+  "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-connect": "^5.0.0",
